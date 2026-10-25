@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agent TAG — remplacements</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..700&display=swap">
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header class="entete">
+  <div class="marque">
+    <span class="nom">Agent TAG</span>
+    <span class="sous-titre">Remplacement des ouvriers absents</span>
+  </div>
+  <div class="identite">
+    <span id="environnement" class="environnement"></span>
+    <label class="champ-utilisateur">Agir en tant que
+      <select id="utilisateur"></select>
+    </label>
+  </div>
+</header>
+
+<div id="avertissement" class="avertissement" role="note" hidden></div>
+
+<main>
+  <form id="selection" class="selection">
+    <label>Date
+      <input type="date" id="date" list="dates-disponibles" required>
+      <datalist id="dates-disponibles"></datalist>
+    </label>
+    <label>Chaîne
+      <select id="chaine"></select>
+    </label>
+    <button type="submit" class="secondaire">Afficher</button>
+    <p id="aide-dates" class="aide"></p>
+  </form>
+
+  <section class="chaine" aria-labelledby="titre-chaine">
+    <div class="chaine-tete">
+      <h1 id="titre-chaine">Choisissez une date et une chaîne</h1>
+      <dl id="synthese" class="synthese"></dl>
+    </div>
+    <div id="bande" class="bande" aria-label="Postes de la chaîne et état des ouvriers"></div>
+    <p id="chaine-vide" class="alerte" hidden>Aucune affectation importée pour cette date : l'état de tous les ouvriers est inconnu et aucun calcul n'est possible.</p>
+  </section>
+
+  <section class="calcul" aria-labelledby="titre-calcul">
+    <div class="calcul-tete">
+      <h2 id="titre-calcul">Calcul des remplacements</h2>
+      <div id="actions-calcul" class="actions"></div>
+    </div>
+    <p id="resume-calcul" class="resume"></p>
+    <p id="bandeau-reimport" class="alerte reimport" role="alert" hidden></p>
+    <p id="alerte-combinaison" class="alerte" hidden></p>
+    <p id="raison-decision" class="raison" hidden></p>
+
+    <div class="plan">
+      <div class="besoins defile">
+        <table id="table-besoins">
+          <caption>Besoins de la chaîne</caption>
+          <thead><tr><th scope="col">Absent</th><th scope="col">Poste</th><th scope="col">État</th><th scope="col">Remplaçant</th></tr></thead>
+          <tbody></tbody>
+        </table>
+        <p id="besoins-vide" class="vide"></p>
+      </div>
+      <aside id="detail" class="detail" aria-live="polite"></aside>
+    </div>
+  </section>
+
+  <section class="historique" aria-labelledby="titre-engagements">
+    <h2 id="titre-engagements">Ouvriers réservés et engagés ce jour</h2>
+    <p class="aide">Toutes chaînes confondues. « Réservé » : retenu par une proposition non confirmée. « Engagé » : remplacement confirmé ; l'ouvrier ne peut être proposé ailleurs.</p>
+    <div class="defile"><table id="table-engagements">
+      <thead><tr><th scope="col">Ouvrier</th><th scope="col">Statut</th><th scope="col">Remplace</th><th scope="col">Chaîne cible</th><th scope="col">Poste quitté</th><th scope="col">Depuis</th></tr></thead>
+      <tbody></tbody>
+    </table></div>
+    <p id="engagements-vide" class="vide"></p>
+  </section>
+
+  <section class="historique" aria-labelledby="titre-imports">
+    <h2 id="titre-imports">Données importées pour ce jour</h2>
+    <p class="aide">Un réimport annule les propositions en attente de la date et signale les remplacements confirmés à revoir ; il ne les annule jamais seul.</p>
+    <div class="defile"><table id="table-imports">
+      <thead><tr><th scope="col">Lot</th><th scope="col">Fichier</th><th scope="col">Appliqué</th><th scope="col">État</th><th scope="col">Chaînes</th><th scope="col">Conséquences</th></tr></thead>
+      <tbody></tbody>
+    </table></div>
+    <p id="imports-vide" class="vide"></p>
+  </section>
+
+  <section class="historique" aria-labelledby="titre-historique">
+    <h2 id="titre-historique">Historique des décisions</h2>
+    <div class="defile"><table id="table-historique">
+      <thead><tr><th scope="col">Quand</th><th scope="col">Décision</th><th scope="col">Besoin</th><th scope="col">Ouvrier</th><th scope="col">Motif</th><th scope="col">Par</th><th scope="col">Valeur</th></tr></thead>
+      <tbody></tbody>
+    </table></div>
+    <p id="historique-vide" class="vide"></p>
+  </section>
+</main>
+
+<div id="message" class="message" role="status" aria-live="assertive" hidden></div>
+<script src="/static/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+# Dépendances d'exécution d'Agent TAG, versions figées (pip freeze dans un environnement neuf,
+# Python 3.13, 2026-10-25). Résolution vérifiée pour Windows 64 bits, Python 3.11, 3.12 et 3.13
+# (roues binaires disponibles pour psycopg-binary et pydantic-core).
+# Installation : pip install -r requirements.lock  puis  pip install -e . --no-deps
+annotated-types==0.8.0
+anyio==4.15.1
+click==8.5.0
+et_xmlfile==2.0.0
+fastapi==0.115.14
+h11==0.16.0
+idna==3.20
+networkx==3.4.2
+openpyxl==3.1.5
+psycopg==3.2.13
+psycopg-binary==3.2.13
+pydantic==2.14.1
+pydantic_core==2.50.1
+starlette==0.46.2
+typing-inspection==0.4.4
+typing_extensions==4.16.0
+uvicorn==0.32.1
+# Dépendances propres à Windows (click, psycopg), absentes d'un pip freeze sous Linux :
+colorama==0.4.6 ; platform_system == "Windows"
+tzdata==2026.5 ; sys_platform == "win32"

@@ -1,0 +1,21 @@
+# PostgreSQL 16 de TEST pour Agent TAG (option Docker Desktop).
+# Port 5433 sur le poste, pour ne pas entrer en conflit avec une installation locale sur 5432.
+services:
+  postgres-test:
+    image: postgres:16
+    container_name: agent_tag_postgres_test
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: pg_admin_test
+    ports:
+      - "5433:5432"
+    volumes:
+      - agent_tag_pgdata:/var/lib/postgresql/data
+      - ./docker/init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgres"]
+      interval: 5s
+      retries: 10
+
+volumes:
+  agent_tag_pgdata:

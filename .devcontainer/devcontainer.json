@@ -1,0 +1,23 @@
+{
+  "name": "Agent TAG — démonstration TEST",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+  "shutdownAction": "stopCompose",
+  "postCreateCommand": "bash scripts/codespaces/installer.sh",
+  "postStartCommand": "bash scripts/codespaces/demarrer.sh --arriere-plan",
+  "forwardPorts": [8000],
+  "portsAttributes": {
+    "8000": { "label": "Agent TAG (interface)", "onAutoForward": "openBrowser" },
+    "5432": { "label": "PostgreSQL (ne pas rendre public)", "onAutoForward": "ignore" }
+  },
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "python.defaultInterpreterPath": "${containerWorkspaceFolder}/.venv/bin/python",
+        "python.testing.pytestEnabled": true
+      },
+      "extensions": ["ms-python.python"]
+    }
+  }
+}
